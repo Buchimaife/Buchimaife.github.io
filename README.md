@@ -1,6 +1,6 @@
 # Data Analytics Portfolio
 # Project 1
-**Title:** Nike US Sales Dashboard 
+**Title:** [Nike US Sales Dashboard](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/NIKE%20DASHBOARDAdvanced-Pivot-Start_v2.xlsx)
 
 **Tools Used:** Excel(Conditional formatting, Pivot table, Pivot chart, Slicers, Time lines)
 
