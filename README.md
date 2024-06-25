@@ -24,7 +24,7 @@ Key columns under scrutiny include Segment, Region, Gross sales, Total revenue, 
 **Key Findings:** 
 
 **Dashboard Overview:**
-![Carsales.PNG](Carsales.PNG)
+![Carsales](Carsales.PNG)
 
 
 
