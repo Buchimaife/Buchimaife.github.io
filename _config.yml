@@ -8,8 +8,8 @@ R for machine learning,
 Python for data interrogation and manipulation, 
 Power Bi for data visualization.
 
-show_downloads: true
+#show_downloads: true
 
-google_analytics:
+#google_analytics:
 
 theme: jekyll-theme-minimal
