@@ -5,7 +5,7 @@
 **Tools Used:** Microsoft Excel 365 (Conditional formatting, Power query Editor, Pivot table, Pivot chart, Slicers, Time lines)
 
 **Description:** 
-The project was carried out to analyze the sales data of Nike USA to identify trends and patterns in the company's sales performance. This project delves into the monthly performance analysis of NIKE USA using it’s sales data from 2021. The data shows the company operates under four  retailers ( One Sports, Sports Locker, Sports Hero and West Gear) , selling 6 products (Men’s Apparel, Men’s Athletic Footwear,  Men’s Street Footwear, Women’s Apparel, Women’s Athletic Footwear and Women’s Street Footwear ) across 50 states and 5 regions in United states of America.
+The project was carried out to analyze the sales data of Nike USA to identify trends and patterns in the company's sales performance. This project delves into the monthly performance analysis of NIKE USA using it’s sales data from 2021. The data shows the company operates with four  retailers ( One Sports, Sports Locker, Sports Hero and West Gear) , selling 6 products (Men’s Apparel, Men’s Athletic Footwear,  Men’s Street Footwear, Women’s Apparel, Women’s Athletic Footwear and Women’s Street Footwear ) across 50 states and 5 regions in United states of America.
 The primary objective of this analysis is to identify the top-selling product by retailers and Operating Profit  within this company across various regions in 2021. This insight has the potential to contribute to better decision making and  the company’s growth in the industry.
 Key columns under scrutiny include Retailer, Product, Region, Sales, and Month.
 
@@ -55,9 +55,19 @@ The dashboard is a visual data representation offering a clear and user-friendly
 **Title:** [Adidas US Sales Dashboard 2020/2021](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/Adidas%20Sales%20Power%20Bi%20Dashboard.pbix)
 
 **Tools Used:** Microsoft Power Bi Desktop(Conditional formatting, Charts,Slicers, Cards)
-**Description:**
+
+**Description:** The project was carried out to analyze the sales data of Adidas USA to identify trends and patterns in the company's sales performance using their sales data in 2020 and 2021. The data shows the company operates with Six  retailers ( West Gear, Foot Locker, Sports Direct,Kohl's, Amazon and Walmart) , selling 6 products (Men’s Street Footwear, Women’s Apparel, Men’s Athletic Footwear, Women’s Street Footwear, Men’s Apparel, and Women’s Athletic Footwear) across 5 regions in the United states of America.
+The primary objective of this analysis is to identify the top-selling product by retailers and Operating Profit within the company across various regions in 2020 and 2021. This insight has the potential to contribute to better decision making and  the company’s growth in the industry.
+Key columns under scrutiny include Retailer, Product, Operating Profit, Region, Sales, and Month.
+
 **Key Findings:** 
+**Sales by Region:**
+**Operating profit by Product:**
+**Sales by Retailers:**
+**Sales by month:**
 **Dashboard Overview:**
+The dashboard is a visual data representation offering a clear and user-friendly overview of essential insights for specific areas. It’s an interactive display of the presented Key Performance Indicators (KPIs).
+
 ![AdidasSalesDashboard](AdidasSalesDashboard.PNG)
 
 
