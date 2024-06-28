@@ -5,8 +5,9 @@
 **Tools Used:** Excel(Conditional formatting, Power query Editor, Pivot table, Pivot chart, Slicers, Time lines)
 
 **Description:** 
-The project was carried out to analyse the sales data of Nike USA to identify trends and patterns in the company's sales performance.This project delves into the monthly performance analysis of NIKE USA using it’s sales data from 2021. The data shows the company operates under four  retailers ( One Sports, Sports Locker, Sports Hero and West Gear) , selling 6 products (Men’s Apparel, Men’s Athletic Footwear,  Men’s Street Footwear, Women’s Apparel, Women’s Athletic Footwear and Women’s Street Footwear ) across 50 states and 5 regions in United states of America.
+The project was carried out to analyze the sales data of Nike USA to identify trends and patterns in the company's sales performance.This project delves into the monthly performance analysis of NIKE USA using it’s sales data from 2021. The data shows the company operates under four  retailers ( One Sports, Sports Locker, Sports Hero and West Gear) , selling 6 products (Men’s Apparel, Men’s Athletic Footwear,  Men’s Street Footwear, Women’s Apparel, Women’s Athletic Footwear and Women’s Street Footwear ) across 50 states and 5 regions in United states of America.
 The primary objective of this analysis is to identify the top-selling product by retailers and Operating Profit  within this company across various regions in 2021. This insight has the potential to contribute to better decision making and  the company’s growth in the industry.
+Key columns under scrutiny include Retailer, Product, Region, Sales, and Month.
 
 **Key Findings:** 
 
@@ -14,7 +15,7 @@ The primary objective of this analysis is to identify the top-selling product by
 
 **Sales by Product :** “ Men Street Footwear” proved to be the the highest product sales across the 5 regions. This highlights the profitability and a strong preference for this product. “Women Athletic Footwear”  on the other hand proved to have the least purchased product across the regions.
 
-**Operating Profit by Sales:** “West” region proved to be making the most profit by sales across the 5 regions making them prime target customer region.  This highlights West profitability .Conversely, “Mid west” made the least of profit by sales across the 5 regions .
+**Operating Profit by Sales:** “West” region proved to be making the most profit by sales across the 5 regions making them prime target customer region.  This highlights "West" profitability .Conversely, “Mid west” made the least of profit by sales across the 5 regions .
 
 **Sales by Months:**  Sales grew in  April  and came to it’s peak in July, showcasing their significance within the sales period.
 
