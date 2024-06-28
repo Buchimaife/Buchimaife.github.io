@@ -52,8 +52,9 @@ The dashboard is a visual data representation offering a clear and user-friendly
 ![Carsales](Carsales.PNG)
 
 # Project 3
-**Title:**
-**Tools Used:**
+**Title:** [Adidas US Sales Dashboard 2020/2021](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/Adidas%20Sales%20Power%20Bi%20Dashboard.pbix)
+
+**Tools Used:** Microsoft Power Bi Desktop(Conditional formatting, Charts,Slicers, Cards)
 **Description:**
 **Key Findings:** 
 **Dashboard Overview:**
