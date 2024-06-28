@@ -39,11 +39,11 @@ Key columns under scrutiny include Segment, Region, Gross sales, Total revenue, 
 
 **Sales by Segment and Transmission:**  “5 Speed Manual Hatchback” proved to be the top-selling car amongst the 3 car segments. This highlights strong preference for the car across the regions and years under review. Conversely, “6 Speed Manual Sedan”  proved be the least purchased car across the regions.
 
-**Net Sales by Channel:**  Car sales were made through 3 different channel (Dealers, Fleet and Retailers). Amongst the  the three channels, Sales made through Fleet proved to be the highest. Conversely, sales made through “Dealers” proved to be the least.
+**Net Sales by Channel:**  Car sales were made through 3 different channel (Dealers, Fleet and Retailers). Amongst the three channels, Sales made through Fleet proved to be the highest. Conversely, sales made through “Dealers” proved to be the least.
 
 **Net Sales by Payment Type:** Payment for the car  were made through 3 different methods ( Cash payment, Financing and leasing). Amongst the three payment methods, most customers made payment through leasing whereas least of the customers made payment through financing. This will inform the company to encourage leasing in order to get in more sales.
 
-**Revenue by Region:**  “North America” region proved to have the highest  revenues across the 3 regions making them prime target customer region.  This highlights North America’s profitability .Conversely, “Europe” has the least revenue by sales across the 3 regions .
+**Revenue by Region:**  “North America” proved to have the highest sales revenues across the 3 regions making them prime target customer region.  This highlights North America’s profitability .Conversely, “Europe” has the least revenue by sales across the 3 regions .
 
 **Gross Sales by Year:**  All car segments successfully  recorded sales across the regions  between 2013 and 2017. Notably,  2013 and 2016 were standout years for sales, showcasing their significance within the sales period.
 
