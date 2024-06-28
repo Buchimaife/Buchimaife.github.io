@@ -6,6 +6,7 @@
 
 **Description:** 
 The project was carried out to analyze the sales data of Nike USA to identify trends and patterns in the company's sales performance. This project delves into the monthly performance analysis of NIKE USA using it’s sales data from 2021. The data shows the company operates under four  retailers ( One Sports, Sports Locker, Sports Hero and West Gear) , selling 6 products (Men’s Apparel, Men’s Athletic Footwear,  Men’s Street Footwear, Women’s Apparel, Women’s Athletic Footwear and Women’s Street Footwear ) across 50 states and 5 regions in United states of America.
+
 The primary objective of this analysis is to identify the top-selling product by retailers and Operating Profit  within this company across various regions in 2021. This insight has the potential to contribute to better decision making and  the company’s growth in the industry.
 Key columns under scrutiny include Retailer, Product, Region, Sales, and Month.
 
@@ -29,7 +30,8 @@ The dashboard is a visual data representation offering a clear and user-friendly
 
 **Tools Used:** Microsoft Excel 365 (Conditional formatting, Power query table, Pivot table, Pivot chart, Slicers, Time lines)
 
-**Description:** This project was carried out to analyse the yearly performance by regions of a Car sales company that sells 3 car segments (Hatchback, Sedan and SUV) using their sales data between 2013 and 2017.
+**Description:** This project was carried out to analyse the yearly performance by regions of a Car sales company that sells 3 car segments (Hatchback, Sedan and SUV), using their sales data between 2013 and 2017.
+
 The primary objective of this analysis is to identify the top-selling cars and operating profit within this company across various  regions, Sales Channels and different segments between the highlighted years. The insights drawn from this analysis  has the potential to contribute to the company’s growth in the industry.
 Key columns under scrutiny include Segment, Region, Gross sales, Total revenue, Year, and Sales. 
 
