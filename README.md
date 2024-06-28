@@ -60,7 +60,7 @@ The dashboard is a visual data representation offering a clear and user-friendly
 
 **Dashboard Overview:**
 
-![AdidasSalesDashboard](AdidasSalesDashboard.PNG)
+
 
 
 
