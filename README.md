@@ -54,7 +54,7 @@ The dashboard is a visual data representation offering a clear and user-friendly
 # Project 3
 **Title:** [Adidas US Sales Dashboard 2020/2021](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/Adidas%20Sales%20Power%20Bi%20Dashboard.pbix)
 
-**Tools Used:** Microsoft Power Bi Desktop(Conditional formatting, Charts,Slicers, Cards)
+**Tools Used:** Microsoft Power Bi Desktop(Conditional formatting, Charts, Slicers, Cards)
 
 **Description:** The project was carried out to analyze the sales data of Adidas USA to identify trends and patterns in the company's sales performance using their sales data in 2020 and 2021. The data shows the company operates with Six  retailers ( West Gear, Foot Locker, Sports Direct,Kohl's, Amazon and Walmart) , selling 6 products (Men’s Street Footwear, Women’s Apparel, Men’s Athletic Footwear, Women’s Street Footwear, Men’s Apparel, and Women’s Athletic Footwear) across 5 regions in the United states of America.
 The primary objective of this analysis is to identify the top-selling product by retailers and Operating Profit within the company across various regions in 2020 and 2021. This insight has the potential to contribute to better decision making and  the company’s growth in the industry.
