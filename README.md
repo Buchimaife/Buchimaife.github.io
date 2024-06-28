@@ -17,7 +17,7 @@ Key columns under scrutiny include Retailer, Product, Region, Sales, and Month.
 
 **Operating Profit by Sales:** “West” region proved to be making the most profit by sales across the 5 regions making them prime target customer region.  This highlights "West" profitability .Conversely, “Mid west” made the least of profit by sales across the 5 regions .
 
-**Sales by Months:**  Sales grew in  April  and came to it’s peak in July, showcasing their significance within the sales period.
+**Sales by Months:**  July and December were the sales peak months, showcasing their significance within the sales period.
 
 **Dashboard Overview:**
 The dashboard is a visual data representation offering a clear and user-friendly overview of essential insights for specific areas. It’s an interactive display of the presented Key Performance Indicators (KPIs).
