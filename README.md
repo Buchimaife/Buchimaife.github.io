@@ -51,7 +51,13 @@ The dashboard is a visual data representation offering a clear and user-friendly
 
 ![Carsales](Carsales.PNG)
 
-
+# Project 3
+**Title:**
+**Tools Used:**
+**Description:**
+**Key Findings:** 
+**Dashboard Overview:**
+![AdidasSalesDashboard](AdidasSalesDashboard.PNG)
 
 
 
