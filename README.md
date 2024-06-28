@@ -57,6 +57,8 @@ The dashboard is a visual data representation offering a clear and user-friendly
 **Tools Used:** Microsoft Power Bi Desktop(Conditional formatting, Charts,Slicers, Cards)
 **Description:**
 **Key Findings:** 
+**Dashboard Overview:**
+![AdidasSalesDashboard](AdidasSalesDashboard.PNG)
 
 
 
