@@ -32,7 +32,7 @@ The dashboard is a visual data representation offering a clear and user-friendly
 
 **Description:** This project was carried out to analyse the yearly performance by regions of a Car sales company that sells 3 car segments (Hatchback, Sedan and SUV), using their sales data between 2013 and 2017.
 
-The primary objective of this analysis is to identify the top-selling cars and operating profit within this company across various  regions, Sales Channels and different segments between the highlighted years. The insights drawn from this analysis  has the potential to contribute to the company’s growth in the industry.
+The primary objective of this analysis is to identify the top-selling cars and operating profit within this company across various  Regions, Sales Channels and different segments between the highlighted years. The insights drawn from this analysis  has the potential to contribute to the company’s growth in the industry.
 Key columns under scrutiny include Segment, Region, Gross sales, Total revenue, Year, and Sales. 
 
 **Key Findings:** 
