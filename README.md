@@ -58,8 +58,7 @@ The dashboard is a visual data representation offering a clear and user-friendly
 
 **Tools Used:** Microsoft Power Bi Desktop (Conditional formatting, Charts, Slicers, Cards)
 
-**Description:** The project was carried out to analyze the sales data of Adidas USA to identify trends and patterns in the company's sales performance using their sales data in 2020 and 2021. The data shows the company operates with Six  retailers ( West Gear, Foot Locker, Sports Direct,Kohl's, Amazon and Walmart) , selling 6 products (Men’s Street Footwear, Women’s Apparel, Men’s Athletic Footwear, Women’s Street Footwear, Men’s Apparel, and Women’s Athletic Footwear) across 5 regions in the United states of America.
-The primary objective of this analysis is to identify the top-selling product by retailers and Operating Profit within the company across various regions in 2020 and 2021. This insight has the potential to contribute to better decision making and  the company’s growth in the industry.
+**Description:** The project was carried out to analyze the sales data of Adidas USA to identify trends and patterns in the company's sales performance using their sales data in 2020 and 2021. The data shows the company operates with Six  retailers ( West Gear, Foot Locker, Sports Direct,Kohl's, Amazon and Walmart) , selling 6 products (Men’s Street Footwear, Women’s Apparel, Men’s Athletic Footwear, Women’s Street Footwear, Men’s Apparel, and Women’s Athletic Footwear) across 5 regions in the United states of America. The primary objective of this analysis is to identify the top-selling product by retailers and Operating Profit within the company across various regions in 2020 and 2021. This insight has the potential to contribute to better decision making and  the company’s growth in the industry.
 
 Key columns under scrutiny include Retailer, Product, Operating Profit, Region, Sales, and Month.
 
@@ -91,7 +90,9 @@ The dashboard is a visual data representation offering a clear and user-friendly
 
 **Description:** 
 This project explores the monthly performance  analysis of a Fedison Winery  that produces six wine brands (Carretera, Montana, Velo, Paseo, VTT, Amarilla). This  analysis was carried out to identify trends and patterns in the company's sales performance using their sales data in 2020 and 2021.The company operates in five distinct countries.
-The aim  of this analysis is to identify the top-selling product by retailers and Operating Profit within the company across various regions in 2020 and 2021. This insight has the potential to contribute to better decision making and  the company’s growth in the industry.
+The primary aim  of this analysis is to identify the top-selling product by retailers and Operating Profit within the company across various regions in 2020 and 2021. This insight has the potential to contribute to better decision making and  the company’s growth in the industry.
+
+Key columns under scrutiny include Segment, Country, Product, Sales, Month, and Units Sold.
 
 **Key Findings:**
 
