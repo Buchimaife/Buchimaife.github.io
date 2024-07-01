@@ -88,9 +88,25 @@ The dashboard is a visual data representation offering a clear and user-friendly
 **Title:** [WineSales.PNG](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/Adidas%20Sales%20Power%20Bi%20Dashboard.pbix)
 
 **Tools Used:** Microsoft Power Bi Desktop(Conditional formatting, Charts, Slicers, Cards)
+
 **Description:** 
-**Key Findings:** 
+This project explores the monthly performance  analysis of a Fedison Winery  that produces six wine brands (Carretera, Montana, Velo, Paseo, VTT, Amarilla). This  analysis was carried out to identify trends and patterns in the company's sales performance using their sales data in 2020 and 2021.The company operates in five distinct countries.
+The aim  of this analysis is to identify the top-selling product by retailers and Operating Profit within the company across various regions in 2020 and 2021. This insight has the potential to contribute to better decision making and  the company’s growth in the industry.
+
+**Key Findings:**
+
+**Product sales by Country:** Product sales by country: "Paseo" proved to be the  wine with the highest sales among the 5 countries, with Canada topping the pack. This demonstrates both Canadian profitability and significant preference for this wine. "VTT" was the least purchased product, and Germany made the fewest purchases throughout the country.
+
+**Sales by Segment:** Government and small businesses were the most active purchases during the fiscal year, making them great target customer groups. Channel partners and the mid-market segment, on the other hand, demonstrated little to no purchasing activity.
+
+
+**Sales by Months:** Sales by Month: October and December were particularly strong months for sales, demonstrating their importance during the sales period.
+
+**Units Sold by the Years:** These products were successfully sold in different  countries in 2013 and 2014. Significantly, 2014 was a tremendously prosperous year.
+
 **Dashboard Overview:**
+The dashboard is a visual data representation offering a clear and user-friendly overview of essential insights for specific areas. It’s an interactive display of the presented Key Performance Indicators (KPIs).
+
 ![WineSales.PNG](WineSales.PNG)
 
 
