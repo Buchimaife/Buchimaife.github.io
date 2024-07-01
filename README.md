@@ -17,7 +17,7 @@ Key columns under scrutiny include Retailer, Product, Region, Sales, and Month.
 
 **Operating Profit by Sales:** “West” region proved to be making the most profit by sales across the 5 regions making them prime target customer region.  This highlights "West" profitability .Conversely, “Mid west” made the least of profit by sales across the 5 regions .
 
-**Sales by Months:**  Year 2013 and 2016 were the sales peak months, showcasing their significance within the sales period.
+**Sales by Months:**  July and November were the sales peak months, showcasing their significance within the sales period.
 
 **Dashboard Overview:**
 The dashboard is a visual data representation offering a clear and user-friendly overview of essential insights for specific areas. It’s an interactive display of the presented Key Performance Indicators (KPIs).
@@ -58,13 +58,21 @@ The dashboard is a visual data representation offering a clear and user-friendly
 
 **Description:** The project was carried out to analyze the sales data of Adidas USA to identify trends and patterns in the company's sales performance using their sales data in 2020 and 2021. The data shows the company operates with Six  retailers ( West Gear, Foot Locker, Sports Direct,Kohl's, Amazon and Walmart) , selling 6 products (Men’s Street Footwear, Women’s Apparel, Men’s Athletic Footwear, Women’s Street Footwear, Men’s Apparel, and Women’s Athletic Footwear) across 5 regions in the United states of America.
 The primary objective of this analysis is to identify the top-selling product by retailers and Operating Profit within the company across various regions in 2020 and 2021. This insight has the potential to contribute to better decision making and  the company’s growth in the industry.
+
 Key columns under scrutiny include Retailer, Product, Operating Profit, Region, Sales, and Month.
 
 **Key Findings:** 
+
 **Sales by Region:**
+“West” of USA  proved to have the highest sales across the 3 regions under review making them prime target customer region.  This highlights the West’s profitability . On the other hand, "Mid west" has the  sales across the 3 regions .
+
 **Operating profit by Product:**
+“Men's Street Footwear” proved to have the highest operating profit amongst all six products across the regions. This highlights the profitability and a strong preference for this product. “Women Athletic Footwear”  on the other hand proved to be the least purchased product amongst the 6 products across the regions this signifies low demand for the product.
+
 **Sales by Retailers:**
+“West Gear” proved to be the retailer with the highest product sales across the 5 regions. This highlights the profitability and a robust sales strategy which “West Gear” brings to the business which encourages business continuity. “Walmart” on the other hand proved to have the least product sales across the 5 regions. This is a pointer for a future project to analyze key indexes that negatively affects their sales in order to re-strategize and boost sales or consider business continuity.
 **Sales by month:**
+ July appeared to be the average sales peak month between the 2 years in review, showcasing their significance within the sales period.
 **Dashboard Overview:**
 The dashboard is a visual data representation offering a clear and user-friendly overview of essential insights for specific areas. It’s an interactive display of the presented Key Performance Indicators (KPIs).
 
