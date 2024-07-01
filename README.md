@@ -73,8 +73,10 @@ Key columns under scrutiny include Retailer, Product, Operating Profit, Region, 
 
 **Sales by Retailers:**
 “West Gear” proved to be the retailer with the highest product sales across the 5 regions. This highlights the profitability and a robust sales strategy which “West Gear” brings to the business which encourages business continuity. “Walmart” on the other hand proved to have the least product sales across the 5 regions. This is a pointer for a future project to analyze key indexes that negatively affects their sales in order to re-strategize and boost sales or consider business continuity.
+
 **Sales by month:**
 July appeared to be the average sales peak month between the 2 years in review, showcasing their significance within the sales period.
+
 **Dashboard Overview:**
 The dashboard is a visual data representation offering a clear and user-friendly overview of essential insights for specific areas. It’s an interactive display of the presented Key Performance Indicators (KPIs).
 
