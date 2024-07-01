@@ -85,12 +85,14 @@ The dashboard is a visual data representation offering a clear and user-friendly
 
 # Project 4
 
-**Title:**
+**Title:** (https://github.com/Buchimaife/Buchimaife.github.io/blob/main/Adidas%20Sales%20Power%20Bi%20Dashboard.pbix)
 
 **Tools Used:**
 **Description:** 
 **Key Findings:** 
 **Dashboard Overview:**
+
+
 
 
 
