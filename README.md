@@ -95,12 +95,12 @@ The aim  of this analysis is to identify the top-selling product by retailers an
 
 **Key Findings:**
 
-**Product sales by Country:** Product sales by country: "Paseo" proved to be the  wine with the highest sales among the 5 countries, with Canada topping the pack. This demonstrates both Canadian profitability and significant preference for this wine. "VTT" was the least purchased product, and Germany made the fewest purchases throughout the country.
+**Product sales by Country:** "Paseo" proved to be the  wine with the highest sales among the 5 countries, with Canada topping the pack. This demonstrates both Canadian profitability and significant preference for this wine. "VTT" was the least purchased product, and Germany made the fewest purchases throughout the country.
 
-**Sales by Segment:** Government and small businesses were the most active purchases during the fiscal year, making them great target customer groups. Channel partners and the mid-market segment, on the other hand, demonstrated little to no purchasing activity.
+**Sales by Segment:** Government and small businesses made the most active purchases during the fiscal year, making them great target customer groups. Channel partners and the mid-market segment, on the other hand, demonstrated little to no purchasing activity.
 
 
-**Sales by Months:** Sales by Month: October and December were particularly strong months for sales, demonstrating their importance during the sales period.
+**Sales by Months:** October and December were particularly strong months for sales, demonstrating their importance during the sales period.
 
 **Units Sold by the Years:** These products were successfully sold in different  countries in 2013 and 2014. Significantly, 2014 was a tremendously prosperous year.
 
