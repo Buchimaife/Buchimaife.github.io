@@ -85,12 +85,13 @@ The dashboard is a visual data representation offering a clear and user-friendly
 
 # Project 4
 
-**Title:** (https://github.com/Buchimaife/Buchimaife.github.io/blob/main/Adidas%20Sales%20Power%20Bi%20Dashboard.pbix)
+**Title:** [WineSales.PNG](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/Adidas%20Sales%20Power%20Bi%20Dashboard.pbix)
 
-**Tools Used:**
+**Tools Used:** Microsoft Power Bi Desktop(Conditional formatting, Charts, Slicers, Cards)
 **Description:** 
 **Key Findings:** 
 **Dashboard Overview:**
+![WineSales.PNG](WineSales.PNG)
 
 
 
