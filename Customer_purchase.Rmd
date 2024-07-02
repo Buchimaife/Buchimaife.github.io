@@ -1,23 +1,20 @@
+#In this exercise, we want to be able to predict whether a customer will purchase a product based on
+#their age and salary from information on 900 sampled customers of a company.
 
-## 1. Machine Learning Task
-In this exercise, we want to be able to predict whether a customer will purchase a product based on
-their age and salary from information on 900 sampled customers of a company.
-For 900 customers, the following quantities are recorded:
+# For 900 customers, the following quantities are recorded:
 
-age - the age of a customer (in years);
-salary - the yearly salary of a customer (in thousands of pounds);
-purchase - whether a customer purchased the product (yes/no);
+#age - the age of a customer (in years);
+#salary - the yearly salary of a customer (in thousands of pounds);
+#purchase - whether a customer purchased the product (yes/no);
 
-# Aim
-Our aim is to design and implement a supervised classification algorithm to solve this
-problem using the provided data.
+# Our aim is to design and implement a supervised classification algorithm to solve this
+#problem using the provided.
 
 # 1. Initial look at the data
 
 # We start by looking at some numerical and graphical summary statistics
 
 #We import the customer data using the R Studio environment
-
 customers <- read.csv("~/customers.txt", sep="")
 customers
 dim(customers)      # the dimensions of the data set
@@ -89,7 +86,7 @@ legend(x = 'topright', legend = c('No', 'Yes'), col = c('blue','red'), pch = 15)
 #training data set and a test data set, respectively.
 
 set.seed(1)                            # to make the results reproducible
-test.subset <- sample(900, 300)     # we randomly choose 300 indices for test data 
+test.subset <- sample(900, 300)     # we randomly choose 5000 indices for test data 
 customers.train <- customers[-test.subset, ]
 customers.test <- customers[test.subset, ]
 
@@ -100,9 +97,6 @@ plot(customers.train$salary, customers.train$age, col = def.col[-test.subset],
      pch = 20, xlab = 'Salary (pounds)', ylab = 'Age (years)',
      main = "Training data")
 legend(x = 'topright', legend = c('No', 'Yes'), col = c('blue','red'), pch = 15)
-
-#Machine Learning Part (c)∗∗∗: Select two supervised classification methods that you
-#studied on this module that would be suitable for these data. Briefly justify your choice.
 
 #For this exercise we will be applying Linear Discriminant Analysis (LDA) and Quadratic Discriminant Analysis (QDA).
 #We will apply LDA because our data set is small. It will reduce the risk of over fitting and 
@@ -261,12 +255,6 @@ new.TP.rate    # 0.8723404
 
 # (a) For the classifier when the threshold 0.5 is used:
 
-lda.test.pred <- predict(pur.lda, newdata = customers.test)  # predictions for test data
-lda.test.class <- lda.test.pred$class  # predicted classes for the test data
-# when threshold equal to 0.5 is used.
-lda.test.tab <- table(lda.test.class, customers.test$purchase)   # confusion matrix
-lda.test.tab   
-
 test.error <- (lda.test.tab[1,2] + lda.test.tab[2,1]) / sum(lda.test.tab)  
 test.error    # 0.2533333
 
@@ -283,9 +271,6 @@ TP.test.rate   # 0.7043478
 
 # New predicted classes:
 new.classes <- ifelse(lda.test.pred$post[,2] > 0.3, 'yes', 'no') 
-
-new.test.tab <- table(new.classes, customers.test$purchase)
-new.test.tab   
 
 new.test.error <- (new.test.tab[1,2] + new.test.tab[2,1]) / sum(new.test.tab)  
 new.test.error  # 0.3033333
@@ -346,8 +331,8 @@ points(customers.train$salary, customers.train$age,
        col = def.col[-test.subset], pch = 20)  
 
 
-# In this case, we do not see much difference between LDA and QDA
-# because of the way the data is distributed. However, we are able to observe
+# In this case, we do not see much difference between LDA and QDA,
+# because of the way data is distributed. However, we are able to observe
 # a difference if we use the entire data set to train the QDA:
 
 pur.qda.all <- qda( purchase ~ salary + age, data = customers)
@@ -379,9 +364,8 @@ plot(roc.perf.qda, colorize = TRUE, print.cutoffs.at = c(0.3, 0.5),
 # We add the ROC curve for LDA to this plot for comparison:
 plot(roc.perf, colorize = TRUE, add = T, print.cutoffs.at = c(0.3, 0.5))
 
-#From the comparison, QDA is more suitable for this classification problem 
+#From the comparison, QDA is more  more suitable for this classification problem 
 #Assuming a normal distribution then the straight line is where the two densities
-#intercept and this will be the class boundary but in this case the variability is not the same therefore 
+#intercept and this will the class boundary but in this case the variability is not the same therefore 
 #the density is intercepted alongside a quadratic equation. The area under the ROC curve is a measure of predictive accuracy. 
-#Values closer to 1 means a good predictive capability. QDA is more flexible. The bias-variance trade-off for  LDA although being 
-#more stable (lower variance) , is less flexible and may be biased. 
+#Values closer to 1 means a good predictive capability.
