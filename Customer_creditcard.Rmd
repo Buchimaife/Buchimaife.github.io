@@ -1,0 +1,329 @@
+ In this task, I demonstrated practical aspects of the KNN method
+# using the data set Default from R library ISLR.
+
+# For 10,000 clients, the following quantities are recorded:
+
+# 1. default  - a factor with levels No and Yes indicating whether a client
+# defaulted on their debt, 
+# 2. student - a factor with levels No and Yes indicating whether the client is a student,
+# 3. balance - the average balance that the client has remaining on their credit card after
+# making their monthly payment, 
+# 4. income - annual income of the client.
+
+# The aim of this task is to be able to predict whether a client will default on their credit card
+# debt based on balance and income, using the KNN method.
+
+
+# 1. Initial look at the data
+
+# I started by looking at some numerical and graphical summary statistics
+
+library(ISLR)
+dim(Default)      # the dimensions of the data set
+# there are 10,000 rows (observations) and 4 columns (variables)
+head(Default)     # display only the first few rows of the data set
+
+attach(Default)   # make the variables in the data set available in the workspace
+
+table(default)
+
+# Only 333 of 10,000 customers defaulted, that is 3.33%.
+
+# I made box plots of Balance and Income to see how they are distributed
+# in the two groups of clients.
+
+par(mfrow = c(1,2))   # divide the graphics window into 2 columns
+boxplot(balance ~ default, xlab = "Default", ylab = "Balance", 
+        col = c("lightblue", "orange"))
+boxplot(income ~ default, xlab = "Default", ylab = "Income", 
+        col = c("lightblue", "orange"))
+
+# It appears that individuals who defaulted tended to have higher credit card 
+# balances than those who did not.
+
+# We also find the mean values of Balance and Income split by the binary 
+# variable Default:
+
+aggregate(balance ~ default, FUN = mean) 
+aggregate(income ~ default, FUN = mean)
+
+# We saw that those who default have a higher balance on their accounts
+# at the end of the month, on average
+# and a slightly smaller income on average but 
+# the difference is not big.
+
+
+# We visualise the data by making a scatter plot of income versus balance
+# and we use colour-coding to indicate the value of default.
+
+
+def.col <- rep('blue', 10000)        # vector of colours
+def.col[default == 'Yes'] <- 'red'     # red colour for default=Yes
+
+par(mfrow = c(1,1))
+plot(balance, income, col = def.col, xlab = 'Balance (dollars)', 
+     ylab = 'Income (dollars)', pch = 20)
+legend(x = 'topright', legend = c('No', 'Yes'), col = c('blue','red'), pch = 15)
+
+# To make the plot clearer, we plot a subsample of data, dropping 8000 
+# randomly chosen points with default=No:
+
+numbers <- which(default == 'No')
+def.sample <- sample(numbers, 8000)  # 8000 randomly chosen numbers
+
+plot(balance[-def.sample], income[-def.sample], col = def.col[-def.sample], 
+     xlab = 'Balance (dollars)', ylab = 'Income (dollars)', pch = 20)
+legend(x = 'topright', legend = c('No', 'Yes'), col = c('blue','red'), pch = 15)
+
+
+# We see that the two classes of observations cannot be easily separated. 
+# However, there is some division between them as clients who default tend
+# to have higher balance than those who do not default.
+
+
+# 2. Training K-Nearest Neighbours Classifier
+
+# We will now perform KNN using the knn() function, which is in the library class.
+# This function requires four inputs:
+
+# 1) train - a matrix containing the predictors for the training data,
+# 2) test - a matrix containing the predictors for the data for which we wish to make predictions, 
+# 3) cl - a vector containing the class labels for the training observations,
+# 4) k - a value for K, the number of nearest neighbours to be used by the classifier.
+
+# The knn() function returns a vector of predicted classes for the test data.
+
+
+library(class)
+
+train.X <- cbind(balance, income)   # the matrix of predictors
+
+k <- 3      
+# we set k to 3 (for no specific reason; later we will learn how to choose optimal k)
+
+def.knn <- knn(train = train.X, test = train.X, cl = default, k = k) 
+# KNN classifier is trained and predictions obtained for training data.
+
+# Now we check the accuracy of the obtained classification rule on the training data
+# using the "confusion matrix":
+
+table(def.knn, default)
+
+# The proportion of incorrectly classified data points (the training error) is
+#  (35+182)/10000 = 0.0217 = 2.17%.
+
+
+# 3. Visualisation of the KNN classifier
+
+# We visualise the resulting classification rule by drawing the class boundary
+# in the scatter plot of the data. 
+# For this, we need to define a grid of points that cover the entire range of the data
+# and use the classifier on this grid. We will use a grid of size 70x70.
+
+
+len <- 70
+xp <- seq(0, 2600, length = len)     # points covering the range of balance
+yp <- seq(0, 70000, length = len)    # points covering the range of income
+xygrid <- expand.grid(balance = xp, income = yp)
+
+# We represent the two classes as 0 (default=No) and 1 (default=Yes) which 
+# will be useful for plotting the class boundary:
+
+cl <- rep(0, 10000); cl[default == 'Yes'] = 1; cl <- as.factor(cl)
+
+# We classify the points from the grid:
+
+grid.knn <- knn( train = train.X, test = xygrid, cl = cl, k = k)
+
+# We prepare the vector of colours to be plotted:
+
+col3 <- rep("lightblue", len*len)
+for (i in 1:(len*len)) if (grid.knn[i]== '1') col3[i] <- "indianred1"
+
+plot(xygrid, col = col3, main = "KNN classifier with K=3", 
+     xlab = "Balance (dollars)", ylab = "Income (dollars)", pch = 16)
+contour(xp, yp, matrix(grid.knn, len), levels = 0.5, add = TRUE, lwd = 2)
+
+
+# 4. What if K changes?
+
+# Consider other values of the parameter K: 1, 2, 4, 5.
+# For each one of them, plot the resulting KNN classifier, as in the plot above.
+
+
+k <- 1
+
+grid.knn <- knn( train = train.X, test = xygrid, cl = cl, k = k)
+
+col3 <- rep("lightblue", len*len)
+for (i in 1:(len*len)) if (grid.knn[i]== '1') col3[i] <- "indianred1"
+
+plot(xygrid, col = col3, main = "KNN classifier with K=1", pch = 16)
+contour(xp, yp, matrix(grid.knn, len), levels = 0.5, add = TRUE, lwd = 2)
+
+# And so on...
+# .....
+
+##############################################################
+# 5. Choosing the best $K$.
+
+# We will find the best value of the tuning parameter K based on the validation error.
+
+# First, we split the data into a training set and a validation set.
+# We will use 50% of the data as the validation set since the data set is very large.
+
+
+set.seed(1)                            # to make the results reproducible
+def.subset <- sample(10000, 5000)      # we randomly choose 5000 numbers out of 10000
+train.X.sub <- train.X[-def.subset, ]  # predictors for the training set
+cl.sub <- cl[-def.subset]              # classes for the training set
+validation.X <- train.X[def.subset, ]        # predictors for the validation set
+validation.cl <- cl[def.subset]              # classes for the validation set
+
+# length(which(cl.train == '1')); sum(cl.train == '1')
+# length(which(cl.train == '0'))
+
+
+# Now, we construct the KNN classifier using the training data and we check
+# its performance on the validation data. The indication of performance is the proportion
+# of wrongly classified observations from the validation set.
+
+
+k <- 1
+def.knn.k <- knn( train = train.X.sub, test = validation.X, cl = cl.sub, k = k)
+tab <- table(def.knn.k, validation.cl)
+tab
+# validation error:
+(tab[2,1] + tab[1,2])/sum(tab)
+
+k <- 2
+def.knn.k <- knn( train = train.X.sub, test = validation.X, cl = cl.sub, k = k)
+tab <- table(def.knn.k, validation.cl)
+tab
+# validation error:
+(tab[2,1] + tab[1,2])/sum(tab)
+
+
+# We can write a function that performs the above task for any given K.
+
+
+validation.error <- function(k){
+  def.knn.k <- knn( train = train.X.sub, test = validation.X, cl = cl.sub, k = k)
+  tab <- table(def.knn.k, validation.cl)
+  error <- (tab[1,2] + tab[2,1]) / sum(tab)
+  return(error)
+}
+
+validation.error(k=1)
+validation.error(k=2)
+validation.error(k=3)
+validation.error(k=4)
+validation.error(k=5)
+
+# How many K's should we check? Let us do this in a more automated way.
+
+errors <- rep(0,50)
+for(i in 1:50) errors[i] <- validation.error(k = i)
+
+plot(errors, xlab="K", ylab = "validation error")
+
+# The plot flattens for larger values of K so we look more closely at a few
+# initial values:
+
+plot(errors[1:20], xlab="K", ylab = "validation error")
+
+
+# We find out that the smallest validation error is attained for K=3 in this case.
+
+
+# 6. Making prediction for a new client.
+
+# Suppose that a client of our bank applies for a credit card.
+# The client has annual income of $52,000 and the average balance of the account $1,450.
+# Should a credit card be issued to this client?
+
+
+knn(train = train.X, test = c(balance = 1450, income = 52000), cl = default, k = 3)
+
+
+# We conclude that based on our model, the client will probably not default.
+# So we should issue a credit card to this client.
+
+
+# 7. Data scaling
+
+# Because the KNN classifier predicts the class of a given test observation
+# by identifying the observations that are nearest to it, the scale of the variables
+# matters. 
+# A good way to handle this problem is to standardize variables so that all variables
+# have a mean of zero and a standard deviation of one. Then all variables will be on
+# a comparable scale. The scale() function does just this. 
+
+
+train.X.s <- scale(train.X)
+
+plot(train.X.s[-def.sample,1], train.X.s[-def.sample,2], col = def.col[-def.sample],
+     xlab = 'Std Balance', ylab = 'Std Income', pch = 20)
+
+# Now we train the classifier using the scaled data and visualise it on a grid.
+
+len <- 70
+xp.s <- seq(-2, 4, length = len)     # points covering the range of std balance
+yp.s <- seq(-3, 3, length = len)     # points covering the range of std income
+xygrid.s <- expand.grid(balance = xp.s, income = yp.s)
+
+cl <- rep(0, 10000); cl[default == 'Yes'] = 1; cl <- as.factor(cl)
+
+k <- 3
+
+grid.knn.s <- knn( train = train.X.s, test = xygrid.s, cl = cl, k = k)
+
+col3 <- rep("lightblue", len*len)
+for (i in 1:(len*len)) if (grid.knn.s[i]== '1') col3[i] <- "indianred1"
+
+plot(xygrid.s, col = col3, main = "KNN classifier with K=3", xlab = "Std Balance",
+     ylab = "Std Income", xlim=c(-2,4), ylim=c(-3,3), pch = 16)
+contour(xp.s, yp.s, matrix(grid.knn.s, len), levels = 0.5, add = TRUE, lwd = 2)
+points(train.X.s[-def.sample,1], train.X.s[-def.sample,2], 
+       col = def.col[-def.sample], pch = 20)
+
+
+#################################################################################
+# Compare the obtained classification rule with the one obtained previously
+# for un-scaled data for K=3 visually and by finding the test errors.
+
+# Step 1: We create training data and test data using scaled variables:
+
+train.X.s.sub <- train.X.s[-def.subset, ]
+test.X.s <- train.X.s[def.subset, ]
+
+# Step 2: We define a function to compute test error using scaled data:
+
+test.error.scaled <- function(k){
+  def.knn.k <- knn( train = train.X.s.sub, test = test.X.s, cl = cl.sub, k = k)
+  tab <- table(def.knn.k, validation.cl)
+  error <- (tab[1,2] + tab[2,1]) / sum(tab)
+  return(error)
+}
+
+test.error.scaled(k=1)   
+test.error.scaled(k=2)   
+
+# Step 3: We compute test errors for K=1, 2, ..., 50:
+
+errors.s <- rep(0,50)
+for(i in 1:50) errors.s[i] <- test.error.scaled(k = i)
+
+plot(errors.s, xlab="K", ylab = "Test error")
+# For comparison, we add test errors for KNN rules that used un-scaled data:
+points(errors, col = 'green')
+legend(x = 'topright', legend = c('Scaled data', 'Un-scaled data'), col = c('black','green'), pch = 15)
+
+# To find the best K:
+which.min(errors.s)   # K=9 gives the smallest test error.
+plot(errors.s[1:20], xlab="K", ylab = "Test error", pch = 16)
+
+
+
+detach(Default)
+
