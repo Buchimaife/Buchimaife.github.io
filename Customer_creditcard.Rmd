@@ -13,10 +13,9 @@
 # The aim of this task is to be able to predict whether a client will default on their credit card
 # debt based on balance and income, using the KNN method.
 
-
 # 1. Initial look at the data
 
-# I started by looking at some numerical and graphical summary statistics
+# We start by looking at some numerical and graphical summary statistics
 
 library(ISLR)
 dim(Default)      # the dimensions of the data set
@@ -29,7 +28,7 @@ table(default)
 
 # Only 333 of 10,000 customers defaulted, that is 3.33%.
 
-# I made box plots of Balance and Income to see how they are distributed
+# We make box plots of Balance and Income to see how they are distributed
 # in the two groups of clients.
 
 par(mfrow = c(1,2))   # divide the graphics window into 2 columns
@@ -47,7 +46,7 @@ boxplot(income ~ default, xlab = "Default", ylab = "Income",
 aggregate(balance ~ default, FUN = mean) 
 aggregate(income ~ default, FUN = mean)
 
-# We saw that those who default have a higher balance on their accounts
+# We see that those who default have a higher balance on their accounts
 # at the end of the month, on average
 # and a slightly smaller income on average but 
 # the difference is not big.
