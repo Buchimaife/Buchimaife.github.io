@@ -1,4 +1,4 @@
- In this task, I demonstrated practical aspects of the KNN method
+# In this task, I demonstrated practical aspects of the KNN method
 # using the data set Default from R library ISLR.
 
 # For 10,000 clients, the following quantities are recorded:
