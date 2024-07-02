@@ -8,7 +8,7 @@
 #purchase - whether a customer purchased the product (yes/no);
 
 # Our aim is to design and implement a supervised classification algorithm to solve this
-#problem using the provided.
+#problem using the provided data.
 
 # 1. Initial look at the data
 
