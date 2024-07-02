@@ -1,0 +1,385 @@
+#In this exercise, we want to be able to predict whether a customer will purchase a product based on
+#their age and salary from information on 900 sampled customers of a company.
+
+# For 900 customers, the following quantities are recorded:
+
+#age - the age of a customer (in years);
+#salary - the yearly salary of a customer (in thousands of pounds);
+#purchase - whether a customer purchased the product (yes/no);
+
+# Our aim is to design and implement a supervised classification algorithm to solve this
+#problem using the provided.
+
+# 1. Initial look at the data
+
+# We start by looking at some numerical and graphical summary statistics
+
+#We import the customer data using the R Studio environment
+
+customers <- read.csv("~/customers.txt", sep="")
+customers
+dim(customers)      # the dimensions of the data set
+# there are 900 rows (observations) and 3 columns (variables)
+
+head(customers)     # To display only the first few rows of the data set
+
+attach(customers)   #To make the variables in the data set available in the workspace
+
+table(purchase) #To get the summary of the distributions of the two classes
+
+# 350 out of 900 customers purchased the product accounting for 38.88%, while 550 customers did not purchase the product. 
+
+
+# We make box plots of age and salary to see how they are distributed
+# in the two groups of customers.
+
+par(mfrow = c(1,2))   # divide the graphics window into 2 columns
+boxplot(age ~ purchase, xlab = "Customers", ylab = "Age", 
+        col = c("lightblue", "orange"))
+boxplot(salary ~ purchase, xlab = "Customers", ylab = "Salary", 
+        col = c("lightblue", "orange"))
+
+# It appears that customers who purchased the product tended to a earn a higher salary 
+# than those who did not.
+
+# We also find the mean values of Age and Salary  split by the binary 
+# variable Customers:
+
+aggregate(age ~ purchase, FUN = mean) 
+aggregate(salary ~ purchase, FUN = mean)
+
+# We see that customers who purchased the products earn an average higher annual salary 
+# at the end of the year 
+#whereas the ages of those that purchased the product on average has no much difference. 
+
+
+
+# We visualise the data by making a scatter plot of age versus salary
+# and we use colour-coding to indicate the value of purchase.
+
+
+def.col <- rep('blue', 900)        # vector of colours
+def.col[purchase == 'yes'] <- 'red'     # red colour for purchase=Yes
+
+par(mfrow = c(1,1))
+plot(salary, age, col = def.col, xlab = 'Salary (pounds)', 
+     ylab = 'Age (years)', pch = 20)
+legend(x = 'topright', legend = c('No', 'Yes'), col = c('blue','red'), pch = 15)
+
+# To make the plot clearer, we plot a subsample of data, dropping 100 
+# randomly chosen points with purchase=No:
+
+numbers <- which(purchase == 'no')
+def.sample <- sample(numbers, 100)  # 100 randomly chosen numbers
+
+plot(salary[-def.sample], age[-def.sample], col = def.col[-def.sample], 
+     xlab = 'Salary (pounds)', ylab = 'Age (years)', pch = 20)
+legend(x = 'topright', legend = c('No', 'Yes'), col = c('blue','red'), pch = 15)
+
+
+# We see that the two classes of observations cannot be easily separated. 
+# However, there is some division between them as most of the customers who
+#purchased the product tend to earn an averagely higher annual salary and more
+#concentrated at the right of the xlab than those who did not purchase the product.
+
+
+#We will randomly split the data using the ratio 2:1 to create a
+#training data set and a test data set, respectively.
+
+set.seed(1)                            # to make the results reproducible
+test.subset <- sample(900, 300)     # we randomly choose 300 indices for test data 
+customers.train <- customers[-test.subset, ]
+customers.test <- customers[test.subset, ]
+
+def.col <- rep('blue', 900) # vector of colours
+def.col[purchase == 'yes'] <- 'red' # red colour for default=Yes
+
+plot(customers.train$salary, customers.train$age, col = def.col[-test.subset], 
+     pch = 20, xlab = 'Salary (pounds)', ylab = 'Age (years)',
+     main = "Training data")
+legend(x = 'topright', legend = c('No', 'Yes'), col = c('blue','red'), pch = 15)
+
+#Machine Learning Part (c)∗∗∗: Select two supervised classification methods that you
+#studied on this module that would be suitable for these data. Briefly justify your choice.
+
+#For this exercise we will be applying Linear Discriminant Analysis (LDA) and Quadratic Discriminant Analysis (QDA).
+#We will apply LDA because our data set is small. It will reduce the risk of over fitting and 
+#give us a stable solution and a straight line.
+#Here we assume each class has got approximately same variability inside of it.
+# We will also apply QDA because QDA is more flexible. The bias-variance trade-off for  LDA although being 
+#more stable (lower variance) , is less flexible and may be biased. 
+
+
+# Linear Discriminant Analysis (LDA)
+
+library(MASS)
+
+pur.lda <- lda(purchase ~ salary + age, data = customers.train)
+
+pur.lda
+# LD1 shows the coordinates of the vector that separates the two classes. 
+par(mar=c(1,1,1,1)) #to fit the figure margin
+plot(pur.lda)    
+# This plot shows the distribution of the projected data (that is the canonical
+# variable) in the two classes separately.
+
+
+# Making predictions using an LDA classifier
+
+lda.pred <- predict(pur.lda, customers.train)  # classify the training data
+names(lda.pred)
+lda.pred$class[1:10]  # predicted classes for the first 10 observations
+lda.pred$post[1:10, ] # posterior probabilities for the first 10 observations
+
+
+# Visualisation of an LDA classifier
+
+# First, we create a grid of points:
+len <- 70
+xp <- seq(0, 70, length = len)     # points covering the range of balance
+yp <- seq(0, 70, length = len)    # points covering the range of income
+xygrid <- expand.grid(salary = xp, age = yp)
+
+# Then, we classify the points in the grid:
+grid.lda <- predict(pur.lda, xygrid)  # classify the points from the grid
+
+# We create a vector of colours to be used in the plot:
+col3 <- ifelse(grid.lda$class == 'yes', "indianred1", "lightblue") # colours
+
+# We define: zp = P(default=No) - P(default=Yes).
+# We will need this later to draw the class boundary at zp=0.
+zp <- grid.lda$post[ ,1] - grid.lda$post[ ,2]   
+# The class boundary: when zp = 0, that is when 
+# P(default=No) = P(default=Yes) = 0.5
+
+# Scatter plot of coloured grid points:
+plot(xygrid, col = col3, main = "LDA classifier", xlab = "Salary (pounds)",
+     ylab = "Age (years)", pch = 16)  
+# Add class boundary:
+contour(xp, yp, matrix(zp, len), levels = 0, add = TRUE, lwd = 2) 
+# Add the training data points:
+points(customers.train$salary, customers.train$age, 
+       col = def.col[-test.subset], pch = 20)    
+
+###########################################################################
+
+#  Evaluation measures for training data
+
+lda.pred <- predict(pur.lda)    # predictions for the training data
+names(lda.pred)
+lda.class <- lda.pred$class     # class predictions for the training data
+lda.class[1:10]
+
+# Confusion matrix
+lda.tab <- table(lda.class, customers.train$purchase)   
+lda.tab
+
+# The overall fraction of incorrectly classified training data is:
+train.error <- (lda.tab[1,2] + lda.tab[2,1]) / sum(lda.tab)  
+train.error  # 0.2366667
+
+# False-Positive rate - the fraction of incorrect classifications for individuals
+# who do not purchase the product:
+FP.rate <- lda.tab[2,1] / (lda.tab[1,1] + lda.tab[2,1])
+FP.rate     # 0.1753425,  False-Positive rate
+
+# False-Negative rate - the fraction of incorrect classifications for individuals
+# who purchased the product:
+FN.rate <- lda.tab[1,2] / (lda.tab[1,2] + lda.tab[2,2])
+FN.rate     # 0.3319149, False-Negative rate
+
+# True-Positive rate - the fraction of correct classifications for individuals
+# who purchased the product:
+TP.rate <- lda.tab[2,2] / (lda.tab[1,2] + lda.tab[2,2])
+TP.rate     # 0.6680851, True-Positive rate
+
+FN.rate + TP.rate   # 1
+# TP.rate = 1 - FN.rate
+
+
+################################################################################
+# Modification of the classification threshold
+################################################################################
+
+
+# We can lower the threshold of 0.5 to, say, 0.3 to lower our chance of incorrectly
+# predicting the class for individuals who default.
+
+# First, we examine visually how much the class boundary changes when the threshold
+# is 0.3, that is if P(default=Yes)>0.3 then we classify a customer as "Yes".
+
+
+# If P(Yes)=0.3 then 
+# zp = P(No) - P(Yes) = 
+#    = (1-P(Yes)) - P(Yes) = 
+#    = 1 - 2*P(Yes) = 
+#    = 1 - 2*0.3 =
+#    = 0.4
+
+# Scatter plot of coloured grid points:
+plot(xygrid, col = col3, main = "LDA classifier", xlab = "Salary (pounds)",
+     ylab = "Age (years)")   
+# Add class boundary (we modify the parameter "levels"):
+contour(xp, yp, matrix(zp, len), levels = c(0, 0.4), add = TRUE, lwd = 2) 
+# Add the training data points:
+points(customers.train$salary, customers.train$age, 
+       col = def.col[-test.subset], pch = 20) 
+
+# Now, we check the training error for this new rule.
+
+new.classes <- ifelse(lda.pred$post[,2] > 0.3, 'yes', 'no') # new predicted classes
+new.classes[1:10]
+
+# Confusion matrix for training data
+new.tab <- table(new.classes, customers.train$purchase)
+new.tab   
+
+# The overall fraction of incorrectly classified data:
+new.train.error <- (new.tab[1,2] + new.tab[2,1]) / sum(new.tab)  
+new.train.error    # 0.3
+
+# The False-Positive rate:
+new.FP.rate <- new.tab[2,1] / (new.tab[1,1] + new.tab[2,1])
+new.FP.rate    # 0.4109589
+
+# The False-Negative rate:
+new.FN.rate <- new.tab[1,2] / (new.tab[1,2] + new.tab[2,2])
+new.FN.rate     # 0.1276596
+
+# The True-Positive rate 
+new.TP.rate <- 1 - new.FN.rate
+new.TP.rate    # 0.8723404
+
+# We observe a vast improvement of the error rate for the individuals
+# who default: the error decreased from 33.19% to 12.76%. 
+# As expected, the two other errors increased.
+
+
+# Evaluation measures for test data 
+
+# (a) For the classifier when the threshold 0.5 is used:
+
+lda.test.pred <- predict(pur.lda, newdata = customers.test)  # predictions for test data
+lda.test.class <- lda.test.pred$class  # predicted classes for the test data
+# when threshold equal to 0.5 is used.
+lda.test.tab <- table(lda.test.class, customers.test$purchase)   # confusion matrix
+lda.test.tab   
+
+test.error <- (lda.test.tab[1,2] + lda.test.tab[2,1]) / sum(lda.test.tab)  
+test.error    # 0.2533333
+
+FP.test.rate <- lda.test.tab[2,1] / (lda.test.tab[1,1] + lda.test.tab[2,1])
+FP.test.rate  # 0.227027
+
+FN.test.rate <- lda.test.tab[1,2] / (lda.test.tab[1,2] + lda.test.tab[2,2])
+FN.test.rate   # 0.2956522
+
+TP.test.rate <- 1 - FN.test.rate
+TP.test.rate   # 0.7043478
+
+# For the classifier when the threshold 0.3 is used:
+
+# New predicted classes:
+new.classes <- ifelse(lda.test.pred$post[,2] > 0.3, 'yes', 'no') 
+
+new.test.tab <- table(new.classes, customers.test$purchase)
+new.test.tab   
+
+new.test.error <- (new.test.tab[1,2] + new.test.tab[2,1]) / sum(new.test.tab)  
+new.test.error  # 0.3033333
+
+new.FP.rate <- new.test.tab[2,1] / (new.test.tab[1,1] + new.test.tab[2,1])
+new.FP.rate   # 0.02114
+
+new.FN.rate <- new.test.tab[1,2] / (new.test.tab[1,2] + new.test.tab[2,2])
+new.FN.rate   # 0.4216216
+
+new.TP.rate <- 1 - new.FN.rate
+new.TP.rate   # 0.8723404
+
+
+# ROC curve for LDA
+
+library(ROCR)
+lda.predict <- predict(pur.lda, newdata = customers.test)
+posteriors <- lda.predict$posterior
+pred <- prediction(predictions = posteriors[ ,2], labels = customers.test$purchase)
+# choose the posterior probability column carefully, it may be 
+# posteriors[,1] or posteriors[,2], depending on your factor levels.
+roc.perf <- performance(pred, measure = "tpr", x.measure = "fpr")
+
+plot(roc.perf, colorize = TRUE, print.cutoffs.at = c(0.3, 0.5),
+     main = "ROC curve for LDA")  
+# colours indicate the value of classification threshold
+
+
+##############################################################################
+
+# Quadratic Discriminant Analysis (QDA)
+
+
+pur.qda <- qda(purchase ~ salary + age, data = customers.train)
+
+pur.qda
+
+# We visualise the QDA classifier
+
+grid.qda <- predict(pur.qda, xygrid)  # classify the points from the grid
+
+names(grid.qda) # names of objects returned by the predict() function
+
+# Prepare the vector of colours to be plotted:
+col4 <- ifelse(grid.qda$class == 'yes', "indianred1", "lightblue") # colours
+
+# Define P(default=No) - P(default=Yes):
+zp <- grid.qda$post[ ,1] - grid.qda$post[ ,2]   
+# We will need this to draw class boundary.
+# The class boundary: when zp = 0, that is P(default=No) = P(default=Yes) = 0.5.
+
+plot(xygrid, col = col4, main = "QDA classifier", xlab = "Salary (pounds)",
+     ylab = "Age (years)", pch = 16)
+# Add class boundary:
+contour(xp, yp, matrix(zp, len), levels = 0, add = TRUE, lwd = 2)  
+points(customers.train$salary, customers.train$age,  
+       col = def.col[-test.subset], pch = 20)  
+
+
+# In this case, we do not see much difference between LDA and QDA
+# because of the way the data is distributed. However, we are able to observe
+# a difference if we use the entire data set to train the QDA:
+
+pur.qda.all <- qda( purchase ~ salary + age, data = customers)
+grid.qda <- predict(pur.qda.all, xygrid)  # classify the points from the grid
+
+col4 <- ifelse(grid.qda$class == 'yes', "indianred1", "lightblue") 
+zp <- grid.qda$post[ ,1] - grid.qda$post[ ,2]   
+plot(xygrid, col = col4, main = "QDA classifier", xlab = "Salary (pounds)",
+     ylab = "Age (years)", pch = 16)
+contour(xp, yp, matrix(zp, len), levels = 0, add = TRUE, lwd = 2)  
+points(customers$salary, customers$age, col = def.col, pch = 20) 
+
+
+
+# ROC curve for QDA
+
+qda.predict <- predict(pur.qda, newdata = customers.test)
+posteriors <- qda.predict$posterior
+pred <- prediction(predictions = posteriors[ ,2], labels = customers.test$purchase)
+# choose the posterior probability column carefully, it may be 
+# posteriors[,1] or posteriors[,2], depending on your factor levels.
+roc.perf.qda <- performance(pred, measure = "tpr", x.measure = "fpr")
+# auc.train <- performance(pred, measure = "auc") # area under the curve
+
+plot(roc.perf.qda, colorize = TRUE, print.cutoffs.at = c(0.3, 0.5),
+     main = "ROC curve for QDA")  
+# colours indicate the value of threshold
+
+# We add the ROC curve for LDA to this plot for comparison:
+plot(roc.perf, colorize = TRUE, add = T, print.cutoffs.at = c(0.3, 0.5))
+
+#From the comparison, QDA is more suitable for this classification problem 
+#Assuming a normal distribution then the straight line is where the two densities
+#intercept and this will be the class boundary but in this case the variability is not the same therefore 
+#the density is intercepted alongside a quadratic equation. The area under the ROC curve is a measure of predictive accuracy. 
+#Values closer to 1 means a good predictive capability. QDA is more flexible. The bias-variance trade-off for  LDA although being 
+#more stable (lower variance) , is less flexible and may be biased. 
