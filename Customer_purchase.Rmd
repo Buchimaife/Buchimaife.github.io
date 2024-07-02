@@ -1,14 +1,16 @@
-#In this exercise, we want to be able to predict whether a customer will purchase a product based on
-#their age and salary from information on 900 sampled customers of a company.
 
-# For 900 customers, the following quantities are recorded:
+## 1. Machine Learning Task
+In this exercise, we want to be able to predict whether a customer will purchase a product based on
+their age and salary from information on 900 sampled customers of a company.
+For 900 customers, the following quantities are recorded:
 
-#age - the age of a customer (in years);
-#salary - the yearly salary of a customer (in thousands of pounds);
-#purchase - whether a customer purchased the product (yes/no);
+age - the age of a customer (in years);
+salary - the yearly salary of a customer (in thousands of pounds);
+purchase - whether a customer purchased the product (yes/no);
 
-# Our aim is to design and implement a supervised classification algorithm to solve this
-#problem using the provided.
+# Aim
+Our aim is to design and implement a supervised classification algorithm to solve this
+problem using the provided data.
 
 # 1. Initial look at the data
 
