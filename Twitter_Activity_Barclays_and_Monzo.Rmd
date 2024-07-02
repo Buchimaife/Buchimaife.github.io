@@ -1,0 +1,444 @@
+---
+title: "COMPARING THE TWITTER ACTIVITY OF BARCLAYS BANK AND MONZO BANK USING R"
+latex engine: xelatex
+encoding: "UTF-8"
+output: beamer_presentation
+font: '10pt'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+
+---
+```{r}
+library(rtweet)
+library(ggplot2)
+library(dplyr)
+library(ggthemes)
+library(readr)
+library(jsonlite)
+library(tidytext)
+library(wordcloud)
+library(wordcloud2)
+library(tidyr)
+library(maps)
+library(httpuv)
+library(gridExtra)
+read_barclays <- read.csv("barclays_data.csv")
+read_monzo <- read.csv("monzo_data.csv")
+
+```
+
+
+## A CASE STUDY OF BARCLAYS VS MONZO BANK
+```{r echo=FALSE,fig.show ='hold', fig.align='center', out.width = '90%'}
+knitr::include_graphics("C:/Users/buchi/OneDrive/Projects/barclays Vs monzo.jpg")
+
+```
+
+---
+
+
+## INTRODUCTION 
+- A BRIEF ABOUT BARCLAYS AND MONZO BANK
+
+The banking industry has witnessed so many reforms just as a technology. In our comparative study, we have chosen Barclays and Monzo's banks based on social media reviews, customer base, and customer feedback on the service provided.
+Barclays bank operates with a physical presence and branches while Monzo bank operates strictly and fully online.
+
+- WHY WE CHOSE THIS CASE STUDY
+The comparative analysis of both banks aims to compare the operations of both banks' services based on the feedback from their social media users(Twitter). Our analysis covers:
+1 Retrieving tweet from Twitter
+2 Data Visualization
+3 Sentiment analysis
+4 Statistical test/analysis
+5 Limitations of the Business Study
+6 Recommendations
+
+
+---
+
+## DATA VISUALIZATION
+
+Data visualization is not only important to communicate results but also a powerful technique for exploratory data analysis. The pictorial representation of data sets allows us to visualize concepts and new patterns.  The reason for this visualization is to find trends in the bank's data extracted and communicate our findings as a recommendation to enable decision-makers to interrelate the data to find better insights.
+
+---
+
+-  VISUALIZATION OF BARCLAYS AND MONZO BANK'S DATA BASED ON TIME SERIES
+
+This shows the frequency at which users tweet on the bank's status on a 20mins interval
+
+```{r echo=FALSE,fig.show ='hold', fig.align='center', out.width = '80%'}
+ts_plot(read_barclays, "20 mins", colour="red") +
+  theme_minimal() + 
+  theme(plot.title = element_text(face = "bold")) + 
+  labs(
+    x = NULL, y = NULL, 
+    title = "Frequency of #barclays bank Twitter statuses",
+    subtitle = "Twitter status (tweet) counts aggregated using 20-minutes intervals",
+    caption = "Source: Data collected from Twitter's REST API via rtweet"
+  )
+```
+
+---
+
+
+-  TIME SERIES FOR MONZO
+```{r echo=FALSE,fig.show ='hold', fig.align='center', out.width = '80%'}
+ts_plot(read_monzo, "20 mins", colour="blue") +
+  theme_minimal() + 
+  theme(plot.title = element_text(face = "bold")) + 
+  labs(
+    x = NULL, y = NULL, 
+    title = "Frequency of #monzo bank Twitter statuses",
+    subtitle = "Twitter status (tweet) counts aggregated using 20-minutes intervals",
+    caption = "Source: Data collected from Twitter's REST API via rtweet"
+  )
+```
+
+---
+
+
+- VISUALIZATION OF BARCLAYS AND MONZO BANK BASED ON THEIR TOP LOCATION 
+
+This will show the top locations of people tweeting.
+
+ TOP 10 LOCATIONS FOR BARCLAYS BANK
+```{r include=FALSE,}
+head(read_barclays$screen_name)
+head(read_monzo$screen_name)
+read_barclays$location[read_barclays$location==""] <- NA
+read_monzo$location[read_monzo$location==""] <- NA
+```
+
+```{r include=FALSE}
+read_barclays %>%
+  count(location, sort = TRUE) %>%
+  mutate(location = reorder(location,n)) %>%
+  na.omit() %>%
+  head(10)
+read_monzo %>%
+  count(location, sort = TRUE) %>%
+  mutate(location = reorder(location,n)) %>%
+  na.omit() %>%
+  head(10)
+```
+
+
+```{r include=FALSE,results="hide",message=FALSE,warning=FALSE}
+read_barclays <- read_barclays %>% mutate(location_rec =
+                                            recode(location, "London, England" = "United Kingdom", 
+                                                   "London" = "London",
+                                                   "United Kingdom" = "United Kingdom",
+                                                   "England" = "United Kingdom",
+                                                   "Phoenix, AZ" = "USA",
+                                                   "Montreal,Quebec" = "Canada",
+                                                   "New York, USA" = "USA","North Little Rock" = "United Kingdom",
+                                                   "sunnyvale,CA" = "Canada",
+                                                   "India" = "India",
+                                                   "Nairobi, Kenya" = "Kenya" 
+                                            ))
+read_monzo <- read_monzo %>% mutate(location_rec =
+                                       recode(location, "London, England" = "London", 
+                                              "London, Manchester" = "London",
+                                              "Croydon, London" = "London",
+                                              "Cambridge,England" = "London",
+                                              "London, United Kingdom" = "London",
+                                              "New York, USA" = "USA","United States" = "USA",
+                                       ))
+```
+
+
+```{r echo=FALSE,fig.show ='hold', fig.align='center', out.width = '60%'}
+read_barclays %>%
+  count(location_rec, sort = TRUE) %>%
+  mutate(location_rec = reorder(location_rec,n)) %>%
+  na.omit() %>%
+  head(10) %>%
+  ggplot(aes(x = location_rec,y = n)) +
+  geom_col(fill = "blue") +
+  coord_flip() +
+  labs(x = "Top Locations ",
+       y = "Frequency",
+       title = "Where Twitter users using #barclays bank are from") +
+  theme(axis.text = element_text(size = 16, color = "blue"),
+        axis.title = element_text(size = 14, color = "red"),
+        title = element_text(size = 18))
+
+
+```
+
+---
+
+TOP 10 LOCATIONS FOR MONZO BANK
+```{r echo=FALSE,fig.show ='hold', fig.align='center', out.width = '60%'}
+read_monzo %>%
+  count(location_rec, sort = TRUE) %>%
+  mutate(location_rec = reorder(location_rec,n)) %>%
+  na.omit() %>%
+  head(10) %>%
+  ggplot(aes(x = location_rec,y = n)) +
+  geom_col(fill = "red") +
+  coord_flip() +
+  labs(x = "Top Locations ",
+       y = "Frequency",
+       title = "Where Twitter users using #monzo bank are from") +
+  theme(axis.text = element_text(size = 16, color = "blue"),
+        axis.title = element_text(size = 14, color = "red"),
+        title = element_text(size = 18))
+```
+
+---
+
+## SENTIMENT ANALYSIS
+Sentiment Analysis contains tools used to detect and understand customers feelings. It helps show insights into how companies can enhance the customer experience and improve customer service.
+Sentiment analysis is extremely useful in social media monitoring as it allows us to gain an overview of the wider public opinion behind certain topics. Doing this analysis will help us make informed decision on the data gotten for Barclays and Monzo's Bank.
+```{r include=FALSE}
+read_barclays$stripped_text <- gsub("http.*","",  read_barclays$text)
+read_barclays$stripped_text <- gsub("https.*","", read_barclays$stripped_text)
+read_barclays$stripped_text <- gsub("amp","", read_barclays$stripped_text)
+head(read_barclays$stripped_text)
+read_monzo$stripped_text <- gsub("http.*","",  read_monzo$text)
+read_monzo$stripped_text <- gsub("https.*","", read_monzo$stripped_text)
+read_monzo$stripped_text <- gsub("amp","", read_monzo$stripped_text)
+head(read_monzo$stripped_text)
+
+```
+
+```{r include=FALSE}
+barclay_clean <-read_barclays %>%
+  select(stripped_text) %>% 
+  mutate(tweetnumber = row_number()) %>% # create new variable denoting the tweet number
+  unnest_tokens(word, stripped_text)
+head(barclay_clean)
+monzo_clean <- read_monzo %>%
+  select(stripped_text) %>% 
+  mutate(tweetnumber = row_number()) %>%
+  unnest_tokens(word, stripped_text)
+head(monzo_clean)
+```
+
+
+```{r include=FALSE}
+data("stop_words")
+cleaned_tweet_words <- monzo_clean %>%
+  anti_join(stop_words)
+
+cleaned_tweet_words1 <- barclay_clean %>%
+  anti_join(stop_words)
+my_stop_words <- data.frame(word = c("bank", "monzo", "apple"))
+my_stop_words1 <- data.frame(word = c("bank", "barclays", "tonight"))
+
+cleaned_monzo_tweet <- cleaned_tweet_words %>%
+  anti_join(my_stop_words)
+
+cleaned_barclay_tweet <- cleaned_tweet_words1 %>%
+  anti_join(my_stop_words1)
+```
+
+
+```{r include=FALSE}
+cleaned_monzo_tweet_2 <- cleaned_monzo_tweet %>%
+  count(word, sort = TRUE) %>% 
+  mutate(freq = n / sum(n))
+head(cleaned_monzo_tweet_2)
+cleaned_barclay_tweet_2 <- cleaned_barclay_tweet %>%
+  count(word, sort = TRUE) %>% 
+  mutate(freq = n / sum(n))
+head(cleaned_barclay_tweet_2)
+```
+
+---
+
+- MOST USED WORDS IN THE TWEET(WORD CLOUD)
+
+This displays the most used words in the tweet extracted for Barclays and Monzo's bank.
+
+```{r echo=FALSE}
+par(mfrow=c(1,2))
+my_stop_words <- data.frame(word = c("bank", "monzo", "apple"))
+with(cleaned_monzo_tweet_2, 
+     wordcloud(word, freq, 
+               min.freq = 1, 
+               max.words = 30,
+               random.order = FALSE, 
+               colors = brewer.pal(8, "Dark2"), 
+               scale = c(2.5, 0.1)))
+title(main = "Wordcloud for Tweets containing #monzo", 
+      cex.main = 1) 
+
+my_stop_words1 <- data.frame(word = c("bank", "barclays", "tonight"))
+with(cleaned_barclay_tweet_2, 
+     wordcloud(word, freq, 
+               min.freq = 1, 
+               max.words = 30,
+               random.order = FALSE, 
+               colors = brewer.pal(8, "Dark2"), 
+               scale = c(2.5, 0.1)))
+title(main = "Wordcloud for Tweets containing #barclay", 
+      cex.main = 1)
+```
+
+```{r include=FALSE}
+bing_word_counts <- cleaned_monzo_tweet %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(word, sentiment, sort = TRUE) %>%
+  mutate(word = reorder(word, n)) 
+head(bing_word_counts)
+```
+
+```{r include=FALSE}
+bing_word_counts1 <- cleaned_barclay_tweet %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(word, sentiment, sort = TRUE) %>%
+  mutate(word = reorder(word, n)) 
+head(bing_word_counts1)
+```
+
+```{r include=FALSE}
+monzo_sentiment <- cleaned_monzo_tweet %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(tweetnumber, sentiment) %>%
+  spread(sentiment, n, fill = 0) %>% 
+  mutate(score = positive - negative) 
+head(monzo_sentiment)
+
+barclay_sentiment <- cleaned_barclay_tweet %>%
+  inner_join(get_sentiments("bing")) %>%
+  count(tweetnumber, sentiment) %>%
+  spread(sentiment, n, fill = 0) %>% 
+  mutate(score = positive - negative) 
+head(barclay_sentiment)
+
+```
+
+
+```{r echo=FALSE}
+monzo_sentiment <- monzo_sentiment %>% 
+  mutate(topic = "monzo")
+
+barclay_sentiment <- barclay_sentiment %>% 
+  mutate(topic = "barclay")
+```
+
+
+```{r include=FALSE}
+monzo_sentiment %>% count(score)
+
+barclay_sentiment %>% count(score)
+```
+
+
+```{r include=FALSE}
+sentiment_means_monzo <- monzo_sentiment %>% 
+  summarize(mean_score = mean(score)) 
+sentiment_means_monzo
+```
+
+```{r include=FALSE}
+sentiment_means_barclay <- barclay_sentiment %>% 
+  summarize(mean_score = mean(score)) 
+sentiment_means_barclay
+```
+
+```{r include=FALSE}
+word_counts_both <- rbind(monzo_sentiment, 
+                          barclay_sentiment)
+
+```
+
+
+```{r echo=FALSE}
+sentiment_means_both <- word_counts_both %>% 
+  group_by(topic) %>% 
+  summarize(mean_score = mean(score)) 
+sentiment_means_both
+```
+
+
+
+---
+
+- PLOT SHOWING THE SENTIMENT SCORE
+
+```{r echo=FALSE}
+ggplot(word_counts_both, 
+       aes(x = score,
+           fill = topic)) +
+  geom_bar() +
+  geom_vline(aes(xintercept = mean_score), 
+             data = sentiment_means_both) +
+  geom_text(aes(x = mean_score, 
+                y = Inf, 
+                label = signif(mean_score, 3)), 
+            vjust = 2, 
+            data = sentiment_means_both) + 
+  scale_x_continuous(breaks = -15:15, 
+                     minor_breaks = NULL) + 
+  scale_fill_manual(values = c("barclay" = "brown", 
+                               "monzo" = "yellow")) + 
+  labs(x = "Sentiment Score" , 
+       y = "Number of tweets", 
+       fill = "Topic") +
+  facet_grid(topic ~ .) +
+  theme(legend.position = "bottom")
+```
+
+---
+
+## STATISTICAL ANALYSIS
+
+- BOX PLOT SHOWING THE MEAN SENTIMENT SCORE FOR BARCLAYS AND MONZO
+```{r echo=FALSE}
+
+ggplot(word_counts_both, aes(x = topic, y = score, fill = topic)) + 
+  geom_boxplot(varwidth = TRUE) +
+  labs(x = "Comparism", y = "Sentiment score") 
+```
+
+---
+
+- TWO SAMPLE T-TEST FOR BARCLAY AND MONZO
+
+We calculated the T-test to find out if there is a significant difference in the sentiment mean for both banks.
+```{r echo=FALSE}
+
+
+t.test(score ~ topic, data = word_counts_both, var.equal = TRUE)
+```
+
+We also calculated the P-value.
+
+```{r echo=FALSE}
+t.test(score ~ topic, data = word_counts_both, var.equal = TRUE)$p.value
+```
+
+---
+
+- INTERPRETATION OF THE STATISTICAL TEST
+
+The test conducted shows that our p-value is more than 0.05, which means there is no underlying difference in the mean sentiment score between Barclays and Monzo  bank, therefore we accept the null hypothesis.
+
+
+- LIMITATION OF THE BUSINESS STUDY
+
+1) Difficulty in extracting enough data for monzo bank which limited our analysis.
+2) We had a lot of null locations which affected the outcome of our graph.
+
+- RECOMMENDATIONS FOR THE BANKS
+1) The both banks should work to improve the customer experience with the service they provide.
+2) They should update their online banking channels to make it easy for their customers to use.
+3) The both banks should be more transparent with their merchant charges.
+
+---
+
+- REFERENCES
+
+Bevans, R. (2020)'An Introduction to t Tests | Definitions, Formula and Examples', https://www.scribbr.com/statistics/t-test
+
+Dalla Valle, L. (2022) 'Introduction to data Extraction from Twitter', DLE/MATH513
+
+Dalla Valle, L. and Stander, J. (2022) 'Essential Rmarkdown Exercises for MTH 513 Big Data and Social Network Visualization', DLE/MATH513
+
+Robbinson,S.(2021)'Sentiment analysis: Why it's necessary and how it improves CX',  Kentucky Farm Bureau,Techtarget.com/searchcustomerexperience/tip/Sentiment-analysis
