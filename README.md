@@ -108,7 +108,7 @@ Key columns under scrutiny include Segment, Country, Product, Sales, Month, and 
 **Dashboard Overview:**
 The dashboard is a visual data representation offering a clear and user-friendly overview of essential insights for specific areas. It’s an interactive display of the presented Key Performance Indicators (KPIs).
 
-![WineSales.PNG](WineSales.PNG)
+![WineSales](WineSales.PNG)
 
 
 # Project 5
