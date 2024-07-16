@@ -111,6 +111,23 @@ The dashboard is a visual data representation offering a clear and user-friendly
 ![WineSales.PNG](WineSales.PNG)
 
 
+# Project 5
+
+**Title:** [HRDASHBOARD HOME.PNG](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/HR%20DASHBOARD.pbix)
+
+**Tools Used:** Microsoft Power Bi Desktop (Conditional formatting, Power Query Editor, Shapes, Charts, , Cards)
+
+**Description:** 
+
+**Key Findings:**
+
+**Dashboard Overview:**
+![HRDASHBOARD HOME.PNG](HRDASHBOARD HOME.PNG)
+
+
+
+
+
 
 
 
