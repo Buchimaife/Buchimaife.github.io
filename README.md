@@ -84,7 +84,7 @@ The dashboard is a visual data representation offering a clear and user-friendly
 
 # Project 4
 
-**Title:** [WineSales.PNG](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/Adidas%20Sales%20Power%20Bi%20Dashboard.pbix)
+**Title:** [Wine Sales Dashboard](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/Adidas%20Sales%20Power%20Bi%20Dashboard.pbix)
 
 **Tools Used:** Microsoft Power Bi Desktop (Conditional formatting, Charts, Slicers, Cards)
 
@@ -113,7 +113,7 @@ The dashboard is a visual data representation offering a clear and user-friendly
 
 # Project 5
 
-**Title:** [HRDASHBOARD HOME.PNG](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/HR%20DASHBOARD.pbix)
+**Title:** [HR DASHBOARD](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/HR%20DASHBOARD.pbix)
 
 **Tools Used:** Microsoft Power Bi Desktop (Conditional formatting, Power Query Editor, Shapes, Charts, , Cards)
 
