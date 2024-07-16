@@ -122,7 +122,7 @@ The dashboard is a visual data representation offering a clear and user-friendly
 **Key Findings:**
 
 **Dashboard Overview:**
-![HRDASHBOARD HOME](HRDASHBOARD HOME.PNG)
+![HRDashboardHOME](HRDashboardHOME.PNG)
 
 
 
