@@ -1,8 +1,5 @@
 ![buchi.png](buchi.png)
 
-![Carsales](Carsales.PNG)
-
-
 # Data Analytics Portfolio
 # Project 1
 **Title:** [Nike US Sales Dashboard](https://github.com/Buchimaife/Buchimaife.github.io/blob/main/NIKE%20DASHBOARDAdvanced-Pivot-Start_v2.xlsx)
