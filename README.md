@@ -1,6 +1,7 @@
 
 # Data Analytics Portfolio
 ![buchi.png](buchi.png)
+
 I am a Data analyst with wide experience in using statistical and data analytics tools such as Advanced Excel, SQL, R, Python and Power Bi for data entry, interrogations, manipulation, and data visualisation. I am proficient in statistical analysis,data mining, and visualization techniques to uncover valuable insights and identify trends. I excel at working with diverse data sources and transforming complex datasets into actionable insights to support informed decision-making. My problem-solving abilities, meticulous attention to detail, and polished presentation skills have been refined through engagements with various clients as a Data Analyst. My proficiency with Microsoft Office and data manipulation enhances my ability to deliver valuable analytical solutions. As a dedicated and detail-oriented analyst, I am well-prepared to contribute to thesuccess of dynamic organizations in this multifaceted role.
 
 # Project 1
